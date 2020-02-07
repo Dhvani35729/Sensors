@@ -1,10 +1,13 @@
 import csv
-from functools import reduce
 
-ntc_temp_csvs = [
-    'raw_data/digikey/ntc_temperature_1.csv',
-    'raw_data/digikey/ntc_temperature_2.csv',
-]
+# Prep data
+ntc_temp_csvs = []
+for x in range(1, 18):
+    ntc_temp_csvs.append('raw_data/digikey/ntc_temperature_{}.csv'.format(x))
+
+ptc_temp_csvs = []
+for x in range(1, 6):
+    ptc_temp_csvs.append('raw_data/digikey/ptc_temperature_{}.csv'.format(x))
 
 
 def RepresentsInt(s):
@@ -16,18 +19,25 @@ def RepresentsInt(s):
 
 
 def calc_ntc_avgs():
-    avgs = calc_avgs_from_csvs(ntc_temp_csvs, 23)
+    avgs, total_sampled = calc_avgs_from_csvs(ntc_temp_csvs, 23)
+    avg_of_avgs = sum(avgs) / len(avgs)
+    return avg_of_avgs
+
+
+def calc_ptc_avgs():
+    avgs, total_sampled = calc_avgs_from_csvs(ptc_temp_csvs, 17)
     avg_of_avgs = sum(avgs) / len(avgs)
     return avg_of_avgs
 
 
 def calc_temp_avgs():
-    avgs = calc_ntc_avgs()
-    return avgs
+    avg_of_avgs = [calc_ntc_avgs(), calc_ptc_avgs()]
+    return sum(avg_of_avgs) / len(avg_of_avgs)
 
 
 def calc_avgs_from_csvs(data_list, power_index):
     avgs = []
+    total_sampled = 0
     for data_file in data_list:
         with open(data_file, newline='') as csvfile:
             spamreader = csv.reader(csvfile, delimiter=',')
@@ -41,10 +51,13 @@ def calc_avgs_from_csvs(data_list, power_index):
                     total += int(raw_power[:raw_power.index("mW")])
                     num_total += 1
 
-            avg = total / num_total
+            if num_total != 0:
+                avg = total / num_total
+                total_sampled += num_total
 
-            avgs.append(avg)
-    return avgs
+                avgs.append(avg)
+
+    return avgs, total_sampled
 
 
 def main():
