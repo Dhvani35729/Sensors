@@ -2,28 +2,28 @@
 
 ## Types
 
-Temperature
-Magnetic
-Pressure
-Optical
-Motion
-Environmental
-Current Transducers
-Ultrasonic
-Image
-Touch
-Proximity
+- Temperature
+- Magnetic
+- Pressure
+- Optical
+- Motion
+- Environmental
+- Current Transducers
+- Ultrasonic
+- Image
+- Touch
+- Proximity
 
 ## Manufacturers
 
-Digi-Key Electronics
-Texas Instruments
-TE Connectivity
-NXP Semiconductors
-STMicroelectornics
-Monnit
-MEMSIC
-Dialog Semiconductor
+- Digi-Key Electronics
+- Texas Instruments
+- TE Connectivity
+- NXP Semiconductors
+- STMicroelectornics
+- Monnit
+- MEMSIC
+- Dialog Semiconductor
 
 ## Steps:
 
