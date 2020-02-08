@@ -1,4 +1,3 @@
-import csv
 import pandas as pd
 
 # Prep data
@@ -14,6 +13,8 @@ def calc_temp_avgs():
         temp_data, "Supply current(Max) (uA)")
 
     print(min_voltage_mean)
+    print(max_voltage_mean)
+    print(max_current_mean)
 
 
 def calc_avgs_from_csv(data_file, col_name):
